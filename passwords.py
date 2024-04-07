@@ -15,11 +15,11 @@ lab1=Label(passwords, text='- Minimum of 8 characters',
           font='skia 15')
 lab1.pack()
 
-lab2=Label(passwords, text='- Must have atleast one number',
+lab2=Label(passwords, text='- Must have at least one number',
           font='skia 15')
 lab2.pack()
 
-lab3=Label(passwords, text='- Must have atleast one special character',
+lab3=Label(passwords, text='- Must have at least one special character',
           font='skia 15')
 lab3.pack()
 
@@ -33,7 +33,7 @@ def submit():
     global fail_chars
     reset.config(state=NORMAL) # Allow user to reset screen
     
-    # Does password meet character requirements?
+    # Does the password meet character requirements?
     if check_len(password) == False:
         fail_len = Label(text='Not enough characters, please try again')
         fail_len.config(font=('Ariel', 15))
@@ -42,7 +42,7 @@ def submit():
         submit.config(state=DISABLED)
     else:
         fail_len = Label(text='')
-    # Does password have a number?
+    # Does the password have a number?
     if check_num(password) == False:
         fail_num = Label(text='Missing a number, please try again')
         fail_num.config(font=('Ariel', 15))
@@ -51,7 +51,7 @@ def submit():
         submit.config(state=DISABLED)
     else:
         fail_num = Label(text='')
-    # Does password have a special character?
+    # Does the password have a special character?
     if check_chars(password) == False:
         fail_chars = Label(text='Missing a special character, please try again')
         fail_chars.config(font=('Ariel', 15))
@@ -78,7 +78,8 @@ def reset():
     fail_num.pack_forget()
     fail_chars.pack_forget()
     submit.config(state=NORMAL)
-
+          
+# Hide and show password
 count = 1
 def password():
     global count
@@ -89,36 +90,34 @@ def password():
     else:
         entry.config(show='*')
         password.config(text='Show Password')
-
+              
+# Close out of the window if a successful password is made
 def closeOut():
     passwords.destroy()
 
-
-
-
-
-
+# CHECK IF ENTRY LENGTH MEETS REQUIREMENTS
 def check_len(entry):
     if (len(entry)<8):
         return False
     else:
         return True
-
+              
+#CHECK IF THE ENTRY MEETS THE NUMBER REQUIREMENTS
 def check_num(entry):
     numbers = '1234567890'
     for char in entry:
         if char in numbers:
             return True
     return False
-
+#CHECK IF THE ENTRY MEETS CHARACTER REQUIREMENTS
 def check_chars(entry):
     special_characters = '!@#$%^&*-_+=|;:,.<>?~'
     for char in entry:
         if char in special_characters:
             return True  
-    return False
-    
+    return False    
 
+# MAIN 3 BUTTONS
 submit = Button(passwords, text='Submit', command=submit)
 submit.place(x=55,y=305)
 
